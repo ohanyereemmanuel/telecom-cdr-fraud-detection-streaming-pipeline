@@ -72,8 +72,8 @@ Below is the end-to-end evidence of the pipeline running successfully, from init
 
 #### 1. Ingestion & Environment Architecture
 * **Live Ingestion Telemetry:** Reviewing stream capacity, message arrivals, and partition distribution inside Azure Event Hubs.
-![Azure Event Hubs Stream Metrics](./assets/Capture.png)
-![Event Hub Ingestion Architecture](./assets/Capture1.png)
+![Azure Event Hubs Stream Metrics](./assets/data-stream-analytics.png)
+![Event Hub Ingestion Architecture](./assets/azure-event-hub-ingestion.png)
 
 #### 2. Complex Event Processing (CEP) Engine Configuration
 * **Stream Analytics Configuration:** Validating inputs (`CallStream`) and mapping temporal boundary thresholds.
@@ -81,15 +81,24 @@ Below is the end-to-end evidence of the pipeline running successfully, from init
 ![ASA Stream Input Scaling](./assets/Capture3.png)
 
 * **Query Engine Testing:** Deploying the optimized SQL self-join logic and measuring output generation under live loads.
-![Stream Analytics Query Editor](./assets/Capture4.png)
-![ASA Real-Time Query Compilation](./assets/Capture5.png)
-![Live Streaming Query Testing](./assets/Capture6.png)
+![Stream Analytics Query Editor](./assets/Capture2.png)
+![ASA Real-Time Query Compilation](./assets/Capture2.png)
+![Live Streaming Query Testing](./assets/Capture2.png)
 
 #### 3. Analyst Triage Live Dashboard
 * **Power BI Live Feed:** The operational interface displaying real-time fraud spikes, geographical routing switch conflicts, and high-risk subscriber lines flagged in sub-5-second intervals.
 ![Power BI Custom Streaming Dataset Setup](./assets/Capture7.png)
-![Power BI Real-Time Analytical Cards](./assets/Capture8.png)
+![Power BI Real-Time Analytical Cards](./assets/Capture5.png)
+![Power BI Live Streaming Dashboard](./assets/Capture3.png)
+![Power BI Live Streaming Dashboard](./assets/Capture4.png)
 ![Power BI Live Streaming Dashboard](./assets/Capture9.png)
+![Power BI Live Streaming Dashboard](./assets/Capture12.png)
+![Power BI Live Streaming Dashboard](./assets/Capture11.png)
+![Power BI Live Streaming Dashboard](./assets/Capture.png)
+
+
+
+
 ## Core Engineering Decisions
 
 ### 1. Complex Event Processing via Temporal Self-Join
