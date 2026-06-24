@@ -61,22 +61,35 @@ A synthetic data generator stands in for the carrier's cell tower network, produ
 
 From there, Azure Stream Analytics reads continuously off the Event Hub and is where the actual fraud logic lives. ASA was chosen over a custom Spark Structured Streaming job or a hand-rolled Kafka Streams consumer specifically because the detection logic is a windowed self-join expressible in declarative SQL — ASA lets that logic be deployed, versioned, and reasoned about as a query rather than as a distributed application that someone has to operate, patch, and scale by hand. The job holds only the bounded state described in the engineering decisions below, runs the temporal self-join every second, and emits a row only when it finds a genuine conflict: the same CallingIMSI active on two different SwitchNum values inside a window too tight for legitimate travel.
 
-Everything ASA emits — which, in normal operation, should be a tiny fraction of total call volume — is pushed as a live dataset directly into Power BI Service. This is the handoff point from engineering to the business, and it's worth being explicit about what that handoff is actually for.
+Everything ASA emits  which, in normal operation, should be a tiny fraction of total call volume — is pushed as a live dataset directly into Power BI Service. This is the handoff point from engineering to the business, and it's worth being explicit about what that handoff is actually for.
 
-Downstream Use: From Detection to Decision
+## Downstream Use: From Detection to Decision
 
 Flagging an anomaly is not the same as resolving it. The reason this pipeline ends in Power BI rather than, say, a log file or a database table, is that the people who act on a fraud signal are fraud analysts, not engineers — and they need to make a judgment call in seconds, not query a warehouse.
 
-The push dataset lands in a dashboard built for exactly that triage moment:
+### 📊 Pipeline Operational Views & Live Dashboard
+Below is the end-to-end evidence of the pipeline running successfully, from initial data ingestion to real-time analytics triage:
 
+#### 1. Ingestion & Environment Architecture
+* **Live Ingestion Telemetry:** Reviewing stream capacity, message arrivals, and partition distribution inside Azure Event Hubs.
+![Azure Event Hubs Stream Metrics](./assets/Capture.PNG)
+![Event Hub Ingestion Architecture](./assets/Capture1.PNG)
 
-A live, auto-refreshing feed of flagged CallingIMSI values, so an analyst sees a conflict appear within seconds of it being detected, not at the next dashboard refresh cycle.
-Switch-pair and time-delta context on each flag (which two SwitchNum values conflicted, and how many seconds apart), so the analyst can immediately judge plausibility without digging back into raw CDRs.
-A rolling count of fraudulent-call volume per tumbling window, giving analysts and fraud-ops leadership a real-time pulse on attack volume, rather than discovering a spike only once it shows up in next month's revenue-leakage report.
-A natural point to wire in action, whether that's a one-click line suspension, a ticket into a case-management system, or a page to an on-call analyst, once a flag crosses a confidence threshold the business is comfortable automating against.
+#### 2. Complex Event Processing (CEP) Engine Configuration
+* **Stream Analytics Configuration:** Validating inputs (`CallStream`) and mapping temporal boundary thresholds.
+![Azure Stream Analytics Input Aliasing](./assets/Capture2.PNG)
+![ASA Stream Input Scaling](./assets/Capture3.PNG)
 
+* **Query Engine Testing:** Deploying the optimized SQL self-join logic and measuring output generation under live loads.
+![Stream Analytics Query Editor](./assets/Capture4.PNG)
+![ASA Real-Time Query Compilation](./assets/Capture5.PNG)
+![Live Streaming Query Testing](./assets/Capture6.PNG)
 
-This is the difference between this system and a batch fraud report: the output isn't a static artifact someone reads after the fact, it's a live operational surface someone watches and acts on while the fraud is still in progress. The value of the entire upstream pipeline — Event Hubs absorbing the stream, ASA correlating it within a 5-second window — is realized at this last step, the moment an analyst sees the flag in time to actually stop something.
+#### 3. Analyst Triage Live Dashboard
+* **Power BI Live Feed:** The operational interface displaying real-time fraud spikes, geographical routing switch conflicts, and high-risk subscriber lines flagged in sub-5-second intervals.
+![Power BI Custom Streaming Dataset Setup](./assets/Capture7.PNG)
+![Power BI Real-Time Analytical Cards](./assets/Capture8.PNG)
+![Power BI Live Streaming Dashboard](./assets/Capture9.PNG)
 ## Core Engineering Decisions
 
 ### 1. Complex Event Processing via Temporal Self-Join
