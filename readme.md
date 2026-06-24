@@ -72,13 +72,14 @@ Below is the end-to-end evidence of the pipeline running successfully, from init
 
 #### 1. Ingestion & Environment Architecture
 * **Live Ingestion Telemetry:** Reviewing stream capacity, message arrivals, and partition distribution inside Azure Event Hubs.
-![Azure Event Hubs Stream Metrics](./assets/data-stream-analytics.png)
+![Real-time calls simulated from Telecogenerator](./assets/Capture1.png)
+![Azure Event Hubs Stream Metrics](./assets/data-stream-azure-event-hub.png)
 ![Event Hub Ingestion Architecture](./assets/azure-event-hub-ingestion.png)
 
 #### 2. Complex Event Processing (CEP) Engine Configuration
 * **Stream Analytics Configuration:** Validating inputs (`CallStream`) and mapping temporal boundary thresholds.
-![Azure Stream Analytics Input Aliasing](./assets/Capture2.png)
-![ASA Stream Input Scaling](./assets/Capture3.png)
+![Azure Stream Analytics Input Aliasing](./assets/data-stream-analytics.png)
+
 
 * **Query Engine Testing:** Deploying the optimized SQL self-join logic and measuring output generation under live loads.
 ![Stream Analytics Query Editor](./assets/Capture2.png)
@@ -91,10 +92,7 @@ Below is the end-to-end evidence of the pipeline running successfully, from init
 ![Power BI Real-Time Analytical Cards](./assets/Capture5.png)
 ![Power BI Live Streaming Dashboard](./assets/Capture3.png)
 ![Power BI Live Streaming Dashboard](./assets/Capture4.png)
-![Power BI Live Streaming Dashboard](./assets/Capture9.png)
-![Power BI Live Streaming Dashboard](./assets/Capture12.png)
-![Power BI Live Streaming Dashboard](./assets/Capture11.png)
-![Power BI Live Streaming Dashboard](./assets/Capture.png)
+
 
 
 
