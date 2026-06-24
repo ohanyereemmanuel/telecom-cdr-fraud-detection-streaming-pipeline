@@ -72,24 +72,24 @@ Below is the end-to-end evidence of the pipeline running successfully, from init
 
 #### 1. Ingestion & Environment Architecture
 * **Live Ingestion Telemetry:** Reviewing stream capacity, message arrivals, and partition distribution inside Azure Event Hubs.
-![Azure Event Hubs Stream Metrics](./assets/Capture.PNG)
-![Event Hub Ingestion Architecture](./assets/Capture1.PNG)
+![Azure Event Hubs Stream Metrics](./assets/Capture.png)
+![Event Hub Ingestion Architecture](./assets/Capture1.png)
 
 #### 2. Complex Event Processing (CEP) Engine Configuration
 * **Stream Analytics Configuration:** Validating inputs (`CallStream`) and mapping temporal boundary thresholds.
-![Azure Stream Analytics Input Aliasing](./assets/Capture2.PNG)
-![ASA Stream Input Scaling](./assets/Capture3.PNG)
+![Azure Stream Analytics Input Aliasing](./assets/Capture2.png)
+![ASA Stream Input Scaling](./assets/Capture3.png)
 
 * **Query Engine Testing:** Deploying the optimized SQL self-join logic and measuring output generation under live loads.
-![Stream Analytics Query Editor](./assets/Capture4.PNG)
-![ASA Real-Time Query Compilation](./assets/Capture5.PNG)
-![Live Streaming Query Testing](./assets/Capture6.PNG)
+![Stream Analytics Query Editor](./assets/Capture4.png)
+![ASA Real-Time Query Compilation](./assets/Capture5.png)
+![Live Streaming Query Testing](./assets/Capture6.png)
 
 #### 3. Analyst Triage Live Dashboard
 * **Power BI Live Feed:** The operational interface displaying real-time fraud spikes, geographical routing switch conflicts, and high-risk subscriber lines flagged in sub-5-second intervals.
-![Power BI Custom Streaming Dataset Setup](./assets/Capture7.PNG)
-![Power BI Real-Time Analytical Cards](./assets/Capture8.PNG)
-![Power BI Live Streaming Dashboard](./assets/Capture9.PNG)
+![Power BI Custom Streaming Dataset Setup](./assets/Capture7.png)
+![Power BI Real-Time Analytical Cards](./assets/Capture8.png)
+![Power BI Live Streaming Dashboard](./assets/Capture9.png)
 ## Core Engineering Decisions
 
 ### 1. Complex Event Processing via Temporal Self-Join
