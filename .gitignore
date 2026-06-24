@@ -1,0 +1,10 @@
+# Ignore the configuration file containing secrets
+*.config
+telcodatagen.exe.config
+
+# Ignore the compiled executable itself
+*.exe
+
+# Ignore system files
+.DS_Store
+Thumbs.db
